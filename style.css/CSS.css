@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+body {
+    background-color: #3c9964;
+    background-image: url("background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Verdana','Hiragino Sans','Meiryo', sans-serif;
+    min-height: 100vh;
+}
+
+/* 設定背景顏色和字體 */
+
+h1 {
+    font-size: 30px;
+    border: 3px solid #f8f8f6fd;
+    background-color: #f7f745fd;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 20px auto;
+    width: 300px;
+    color: #7ca2d7ce;
+    text-align: center;
+}
+/* h1的顏色和對齊方式 */
+
+p,ul {
+    margin-bottom: 20px;
+    text-align: center;
+}
+/* 設定段落的底部邊距和對齊方式 */
+
+img {
+    display: block;
+    margin: 0 auto;
+    border: 3px solid #8be4e7fd;
+    border-radius: 50%;
+
+
+}
+/* 設定圖片的大小和對齊方式 */
+
+a {
+    background-color: #5feda8;
+    display: block;
+    font-size: 18px;
+    color: #fdfdfd;
+    padding: 20px 0;
+    border-radius: 4px;
+    font-weight: bold;
+
+}
+
+ul {
+    width: 300px;
+    margin: 0 auto;
+}
+li {
+    margin-bottom: 20px;
+    text-align: center;
+}
+/* 設定連結的顏色和背景顏色 */
