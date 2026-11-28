@@ -10,7 +10,7 @@
 </head> 
 <body>
     <h1>干貝菌</h1>
-    <IMG SRC="初音可愛.jpg" ALT="干貝菌" WIDTH="300" HEIGHT="300">
+    <IMG SRC="初音可愛.jpg" ALT="干貝菌" WIDTH="300" HEIGHT="300" class="moving-photo">
     
     <p>大家好，我是干貝菌。</p>
     <p>我喜歡玩遊戲，最近對程式設計和網頁開發有興趣。</p>
@@ -19,6 +19,65 @@
         <li><a href="https://thehappiestpersonintheworld2026.blogspot.com/">bloger(生活日記)</a></li>
         <li><a href="2">代訂(預計作品集)</a></li>
     </ul>
-    
+   
+<!-- 隱藏的 YouTube 播放器容器 -->
+<div id="youtube-player" aria-hidden="true"></div>
+
+<!-- 右下角音樂控制按鈕 -->
+<button id="music-btn" class="music-toggle" type="button" aria-label="開啟音樂" aria-pressed="false">🔇 開啟音樂</button>
+
+<!-- 載入 YouTube 官方 API 與控制腳本 -->
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  const VIDEO_ID = "8jfac2hDiQY";
+
+  let player;
+  let isPlaying = false;
+  const btn = document.getElementById("music-btn");
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player("youtube-player", {
+      height: "1",
+      width: "1",
+      videoId: VIDEO_ID,
+      playerVars: {
+        autoplay: 0,
+        loop: 1,
+        playlist: VIDEO_ID,
+        controls: 0,
+        modestbranding: 1,
+        rel: 0
+      },
+      events: {
+        onReady: (event) => {
+          event.target.setVolume(50);
+        },
+        onStateChange: (event) => {
+          updateButton(event.data === YT.PlayerState.PLAYING);
+        }
+      }
+    });
+  }
+
+  function updateButton(playing) {
+    isPlaying = playing;
+    btn.textContent = playing ? "🔊 播放中" : "🔇 開啟音樂";
+    btn.setAttribute("aria-pressed", String(playing));
+    btn.setAttribute("aria-label", playing ? "暫停音樂" : "開啟音樂");
+  }
+
+  function toggleMusic() {
+    if (!player || typeof player.playVideo !== "function") return;
+
+    if (isPlaying) {
+      player.pauseVideo();
+    } else {
+      player.playVideo();
+    }
+  }
+
+  btn.addEventListener("click", toggleMusic);
+</script>
+
 </body>
 </html>

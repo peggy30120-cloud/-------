@@ -61,3 +61,62 @@ li {
     text-align: center;
 }
 /* 設定連結的顏色和背景顏色 */
+
+.moving-photo {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  animation: swingEffect 2s ease-in-out infinite;
+}
+
+@keyframes swingEffect {
+  0%, 100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(6deg);
+  }
+}
+/* 設定圖片的動畫效果 */
+
+.music-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.music-toggle:hover {
+  transform: scale(1.05);
+}
+
+.music-toggle:focus-visible {
+  outline: 3px solid #f7f745fd;
+  outline-offset: 3px;
+}
+
+.music-toggle[aria-pressed="true"] {
+  background-color: rgba(95, 237, 168, 0.9);
+  color: #16452d;
+}
+
+#youtube-player {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  left: -10px;
+  bottom: 0;
+  overflow: hidden;
+}
+/* 設定音樂播放按鈕的樣式和位置 */
