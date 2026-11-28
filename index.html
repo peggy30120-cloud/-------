@@ -79,5 +79,76 @@
   btn.addEventListener("click", toggleMusic);
 </script>
 
+
+<!-- 初音桌寵圖片（預設顯示站立圖） -->
+<img id="miku-pet" src="miku-stand.png.png" alt="初音桌寵" class="miku-pet">
+
+<script>
+  const miku = document.getElementById("miku-pet");
+
+  // 圖片清單
+  const walkFrames = ["miku-walk1.png.png", "miku-stand.png.png", "miku-walk2.png.png", "miku-stand.png.png"];
+  const panicFrames = ["miku-panic1.png.png", "miku-panic2.png.png", "miku-ouch.png.png"];
+
+  let posX = window.innerWidth - 120; // 從畫面右側出發
+  let direction = -1;                 // -1 代表向左走（符合原圖朝向），1 代表向右走
+  const speed = 1.3;                  // 走路速度
+  let frameIndex = 0;
+  let isPanicking = false;            // 是否正在被戳/慌張狀態
+
+  // 1. 雙腳踏步換圖動畫（每 220 毫秒換一張動作圖）
+  setInterval(() => {
+    if (isPanicking) {
+      // 慌張狀態：輪播流冷汗與 >< 表情
+      frameIndex = (frameIndex + 1) % panicFrames.length;
+      miku.src = panicFrames[frameIndex];
+    } else {
+      // 正常散步：輪播走路與站立圖
+      frameIndex = (frameIndex + 1) % walkFrames.length;
+      miku.src = walkFrames[frameIndex];
+    }
+  }, 220);
+
+  // 2. 左右移動與邊界轉向邏輯
+  function moveMiku() {
+    if (!isPanicking) {
+      posX += speed * direction;
+
+      // 走到最左邊時，轉頭向右走
+      if (posX <= 10) {
+        direction = 1;
+        miku.style.transform = "scaleX(-1)"; // 水平翻轉面朝右
+      } 
+      // 走到最右邊時，轉頭向左走
+      else if (posX >= window.innerWidth - 95) {
+        direction = -1;
+        miku.style.transform = "scaleX(1)";  // 恢復原圖面朝左
+      }
+
+      miku.style.left = posX + "px";
+    }
+    requestAnimationFrame(moveMiku);
+  }
+
+  // 啟動移動
+  moveMiku();
+
+  // 3. 點擊互動：戳一下初音，她會嚇一跳原地慌張掙扎 1.2 秒
+  miku.addEventListener("click", (e) => {
+    e.stopPropagation(); // 避免誤觸背景音樂開關
+    if (isPanicking) return;
+
+    isPanicking = true;
+    frameIndex = 0;
+    miku.src = "miku-ouch.png.png";
+    miku.classList.add("miku-shake");
+
+    setTimeout(() => {
+      isPanicking = false;
+      miku.classList.remove("miku-shake");
+    }, 1200);
+  });
+</script>
+
 </body>
 </html>

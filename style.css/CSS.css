@@ -120,3 +120,24 @@ li {
   overflow: hidden;
 }
 /* 設定音樂播放按鈕的樣式和位置 */
+
+.miku-pet {
+  position: fixed;
+  bottom: 0px;          /* 貼齊螢幕最底部走路 */
+  width: 85px;          /* 初音大小，可依喜好調整 */
+  height: auto;
+  z-index: 998;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 被點擊時的原地慌張跳動特效 */
+.miku-shake {
+  animation: panicBounce 0.25s infinite alternate;
+}
+
+@keyframes panicBounce {
+  from { bottom: 0px; }
+  to { bottom: 15px; }
+}
+/* 設定初音的樣式和動畫效果 */
